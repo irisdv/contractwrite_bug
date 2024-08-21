@@ -8,13 +8,11 @@ import { Connector } from "starknetkit";
 
 export default function Home() {
   const { address } = useAccount();
-  console.log("address", address);
   const [loading, setLoading] = useState<boolean>(true);
   const [ownedIdentities, setOwnedIdentities] = useState<any[]>([]);
   const [externalDomains, setExternalDomains] = useState<string[]>([]);
   const randomTokenId: number = Math.floor(Math.random() * 1000000000000);
   const router = useRouter();
-  const [isTxModalOpen, setIsTxModalOpen] = useState(false);
   const { connectAsync, connectors } = useConnect();
   const [showWalletConnectModal, setShowWalletConnectModal] =
     useState<boolean>(false);
@@ -73,7 +71,6 @@ export default function Home() {
 
   return (
     <>
-      {/* <div className={styles.containerGallery}> */}
       <div>
         <div>
           {loading ? (
@@ -97,17 +94,13 @@ export default function Home() {
                       : () => setShowWalletConnectModal(true)
                   }
                 >
-                  {address ? "Connect" : "Add Identities"}
+                  {address ? "Mint Identity" : "Connect wallet"}
                 </button>
               </div>
             </>
           ) : (
             <div>
-              {/* <IdentitiesGallery
-                identities={ownedIdentities}
-                externalDomains={externalDomains}
-                address={address}
-              /> */}
+              <div>Connected with {address}</div>
               <div className="w-fit block mx-auto px-4 mt-[33px]">
                 <button
                   onClick={
@@ -116,18 +109,8 @@ export default function Home() {
                       : () => setShowWalletConnectModal(true)
                   }
                 >
-                  {address ? "Connect" : "Add Identities"}
+                  {address ? "Mint Identity" : "Connect wallet"}
                 </button>
-                {/* <ClickableAction
-                  title="ADD IDENTITIES"
-                  icon={<MintIcon />}
-                  onClick={
-                    address
-                      ? () => mint()
-                      : () => setShowWalletConnectModal(true)
-                  }
-                  width="auto"
-                /> */}
               </div>
             </div>
           )}
